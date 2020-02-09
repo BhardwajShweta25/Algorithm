@@ -1,0 +1,59 @@
+#include<fstream>
+#include<stdio.h>
+#include<iostream>
+
+using namespace std;
+
+int selection(int ar[], int len)
+{
+	int cnt=0;
+	 
+for(int i=0;i<len-1;i++)
+    {
+    	int min=i;
+	for(int j=i+1;j<len;j++)
+	{
+		if(ar[min]>ar[j])
+		 {
+	     min=j;
+	     }
+ 		cnt++;
+	}
+	if(min!=i)
+	{
+		int temp=ar[min];
+		ar[min]=ar[i];
+		ar[i]=temp;
+	}
+
+	}	
+	return cnt;
+}
+int main()
+{
+	int ar[1000];
+	int len=0;
+	int i=0;
+	ifstream ifile("b.txt");
+	while(!ifile.eof())
+	{
+	ifile>>ar[i];
+	i++;
+	len++;
+	}
+	ifile.close();
+	cout<<"\n Unsorted array: \n";
+
+	for(int j=0;j<len;j++)
+	{
+		cout<<ar[j]<<" ";
+	}
+	cout<<"\nNo. of comparisons: "<<selection(ar,len)<<endl;
+	cout<<"\n Sorted array: \n";
+	for(int j=0;j<len;j++)
+	{
+		cout<<ar[j]<<" ";
+	}
+	return 0;
+}
+

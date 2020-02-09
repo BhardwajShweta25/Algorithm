@@ -1,0 +1,56 @@
+#include<fstream>
+#include<stdio.h>
+#include<iostream>
+
+using namespace std;
+
+int insertion(int ar[], int len)
+{
+	int cnt=0;
+	int temp,j;
+	for(int i=1;i<len;i++)
+	{
+	
+	//i is pointer to start position of unsorted array
+	temp=ar[i];
+	j=i-1;
+	//j is pointing of end of sorted array
+	if(ar[j]<temp)
+	 cnt++;	
+		while(j>=0&&ar[j]>temp)
+		{  
+			ar[j+1]=ar[j];
+			j=j-1;
+			cnt++;
+		}
+		ar[j+1]=temp;
+	}
+	return cnt;
+}
+int main()
+{
+	int ar[1000];
+	int len=0;
+	int i=0;
+	ifstream ifile("file.txt");
+	while(!ifile.eof())
+	{
+	ifile>>ar[i];
+	i++;
+	len++;
+	}
+	ifile.close();
+	cout<<"\n Unsorted array: \n";
+
+	for(int j=0;j<len;j++)
+	{
+		cout<<ar[j]<<" ";
+	}
+	cout<<"\nNo. of comparisons: "<<insertion(ar,len)<<endl;
+	cout<<"\n Sorted array: \n";
+	for(int j=0;j<len;j++)
+	{
+		cout<<ar[j]<<" ";
+	}
+	return 0;
+}
